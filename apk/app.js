@@ -115,7 +115,12 @@ async function loadModel() {
   addSystemMessage("Downloading and initializing model — this only happens once per model.");
 
   try {
-    const { pipeline } = await import("https://esm.run/@huggingface/transformers");
+    const { pipeline, env } = await import("https://esm.run/@huggingface/transformers");
+
+    // Capacitor's local WebView server doesn't set the cross-origin-isolation
+    // headers that multi-threaded WASM needs, which was crashing the app at
+    // load time. Forcing single-threaded mode trades some speed for stability.
+    env.backends.onnx.wasm.numThreads = 1;
 
     const seen = {};
     generator = await pipeline("text-generation", modelSelect.value, {
