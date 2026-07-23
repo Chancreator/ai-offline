@@ -1,0 +1,6 @@
+{
+  "appId": "com.offlinechat.app",
+  "appName": "Offline Chat",
+  "webDir": "apk",
+  "bundledWebRuntime": false
+}
