@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Offline Chat — on-device AI</title>
+<meta name="theme-color" content="#0b0a08">
+<meta name="description" content="A private AI chat that runs entirely on your device. No server, no signal required after setup.">
+
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="boot" class="boot">
+  <pre id="boot-lines" class="boot-lines"></pre>
+</div>
+
+<div class="app" id="app" hidden>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">▣</span>
+      <span class="brand-text">OFFLINE<span class="brand-accent">.CHAT</span></span>
+    </div>
+    <div class="signal" id="signal" title="Connection state">
+      <span class="signal-dot" id="signal-dot"></span>
+      <span id="signal-label">checking…</span>
+    </div>
+  </header>
+
+  <section class="rail" id="setup-rail">
+    <div class="rail-row">
+      <label for="model-select">MODEL</label>
+      <select id="model-select"></select>
+      <button id="load-btn" class="btn">Load on device</button>
+    </div>
+
+    <div class="progress-wrap" id="progress-wrap" hidden>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-label" id="progress-label">0%</div>
+    </div>
+
+    <p class="hint" id="gpu-hint"></p>
+  </section>
+
+  <main class="chat" id="chat" aria-live="polite"></main>
+
+  <form class="composer" id="composer">
+    <textarea id="input" placeholder="Ask anything — nothing leaves this device" rows="1" disabled></textarea>
+    <button type="submit" id="send-btn" class="btn btn-send" disabled>Send</button>
+  </form>
+
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
