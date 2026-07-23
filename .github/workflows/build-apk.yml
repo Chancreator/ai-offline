@@ -37,6 +37,20 @@ jobs:
       - name: Sync web assets into the Android project
         run: npx cap sync android
 
+      - name: Force a consistent Kotlin stdlib version
+        run: |
+          cat >> android/build.gradle << 'EOF'
+
+allprojects {
+    configurations.all {
+        resolutionStrategy {
+            force 'org.jetbrains.kotlin:kotlin-stdlib:1.9.24'
+            force 'org.jetbrains.kotlin:kotlin-stdlib-common:1.9.24'
+        }
+    }
+}
+EOF
+
       - name: Build debug APK
         run: |
           cd android
